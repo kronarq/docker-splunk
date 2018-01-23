@@ -12,8 +12,8 @@ ENV SPLUNK_BACKUP_DEFAULT_ETC /var/opt/splunk
 ARG DEBIAN_FRONTEND=noninteractive
 
 # add splunk:splunk user
-RUN groupadd -r ${SPLUNK_GROUP} \
-    && useradd -r -m -g ${SPLUNK_GROUP} ${SPLUNK_USER}
+RUN groupadd ${SPLUNK_GROUP} \
+    && useradd -d ${SPLUNK_HOME} -m -s /bin/bash -g ${SPLUNK_GROUP} ${SPLUNK_USER}
 
 # make the "en_US.UTF-8" locale so splunk will be utf-8 enabled by default
 RUN apt-get update  && apt-get install -y --no-install-recommends apt-utils && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
